@@ -1,0 +1,7 @@
+<h1>All employees</h1>
+<% @employees.each do |employee| %>
+  <h2><%= employee["firstName"] %> <%= employee["lastName"] %></h2>
+  <p>Email: <%= employee["email"] %></p>
+  <p>Birthdate: <%= employee["birthdate"] %></p>
+  <a href="/employees/<%= employee['id'] %>">More info</a>
+<% end %>
