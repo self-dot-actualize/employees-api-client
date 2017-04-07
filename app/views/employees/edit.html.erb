@@ -1,0 +1,19 @@
+<h1>Edit Employee</h1>
+<%= form_tag "/employees/#{@employee['id']}", method: :patch do %>
+  <div>
+    First name: <input type="text" name="form_first_name" value="<%= @employee['firstName'] %>">
+  </div>
+  <div>
+    Last name: <input type="text" name="form_last_name" value="<%= @employee['lastName'] %>">
+  </div>
+  <div>
+    Birthdate: <input type="text" name="form_birthdate" value="<%= @employee['birthdate'] %>">
+  </div>
+  <div>
+    Email: <input type="text" name="form_email" value="<%= @employee['email'] %>">
+  </div>
+  <div>
+    SSN: <input type="text" name="form_ssn" value="<%= @employee['ssn'] %>">
+  </div>
+  <input type="submit" value="Update employee">
+<% end %>
