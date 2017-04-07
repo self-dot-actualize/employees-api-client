@@ -2,3 +2,6 @@
 <h2><%= @employee["firstName"] %> <%= @employee["lastName"] %></h2>
 <p><%= @employee["birthdate"] %></p>
 <p><%= @employee["email"] %></p>
+<%= form_tag "/employees/#{@employee['id']}", method: :delete do %>
+  <input type="submit" value="Destroy this employee">
+<% end %>
