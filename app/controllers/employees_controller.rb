@@ -1,8 +1,10 @@
 class EmployeesController < ApplicationController
+  HEADERS = {'X-User-Email' => ENV['API_EMAIL'], 'Authorization' => "Token token=#{ENV['API_KEY']}"}
+
   def index
     @employees = Unirest.get(
-      "http://localhost:3000/api/v1/employees",
-      headers: {'X-User-Email' => ENV['API_EMAIL'], 'Authorization' => "Token token=#{ENV['API_KEY']}"}
+      "#{ENV['API_BASE_URL']}/employees",
+      headers: HEADERS
     ).body
     render "index.html.erb"
   end
@@ -13,8 +15,8 @@ class EmployeesController < ApplicationController
 
   def create
     @employee = Unirest.post(
-      "http://localhost:3000/api/v1/employees",
-      headers: {'X-User-Email' => ENV['API_EMAIL'], 'Authorization' => "Token token=#{ENV['API_KEY']}"},
+      "#{ENV['API_BASE_URL']}/employees",
+      headers: HEADERS,
       parameters: {
         first_name: params["form_first_name"],
         last_name: params["form_last_name"],
@@ -28,24 +30,24 @@ class EmployeesController < ApplicationController
 
   def show
     @employee = Unirest.get(
-      "http://localhost:3000/api/v1/employees/#{params[:id]}",
-      headers: {'X-User-Email' => ENV['API_EMAIL'], 'Authorization' => "Token token=#{ENV['API_KEY']}"}
+      "#{ENV['API_BASE_URL']}/employees/#{params[:id]}",
+      headers: HEADERS
     ).body
     render "show.html.erb"
   end
 
   def edit
     @employee = Unirest.get(
-      "http://localhost:3000/api/v1/employees/#{params[:id]}",
-      headers: {'X-User-Email' => ENV['API_EMAIL'], 'Authorization' => "Token token=#{ENV['API_KEY']}"}
+      "#{ENV['API_BASE_URL']}/employees/#{params[:id]}",
+      headers: HEADERS
     ).body
     render "edit.html.erb"
   end
 
   def update
     @employee = Unirest.patch(
-      "http://localhost:3000/api/v1/employees/#{params[:id]}",
-      headers: {'X-User-Email' => ENV['API_EMAIL'], 'Authorization' => "Token token=#{ENV['API_KEY']}"},
+      "#{ENV['API_BASE_URL']}/employees/#{params[:id]}",
+      headers: HEADERS,
       parameters: {
         first_name: params["form_first_name"],
         last_name: params["form_last_name"],
@@ -59,8 +61,8 @@ class EmployeesController < ApplicationController
 
   def destroy
     @message = Unirest.delete(
-      "http://localhost:3000/api/v1/employees/#{params[:id]}",
-      headers: {'X-User-Email' => ENV['API_EMAIL'], 'Authorization' => "Token token=#{ENV['API_KEY']}"}
+      "#{ENV['API_BASE_URL']}/employees/#{params[:id]}",
+      headers: HEADERS
     )
     redirect_to "/employees"
   end
